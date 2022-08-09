@@ -1,0 +1,15 @@
+{
+  "name": "budibase-skeleton",
+  "version": "1.0.0",
+  "description": "Linting and prepping skeleton project.",
+  "main": "index.js",
+  "repository": "git@github.com:Budibase/budibase-skeleton.git",
+  "license": "MIT",
+  "scripts": {
+    "lint:fix:prettier": "prettier --write \"./**/*.{js,ts,svelte}\""
+  },
+  "devDependencies": {
+    "prettier": "^2.7.1",
+    "prettier-plugin-svelte": "^2.7.0"
+  }
+}
