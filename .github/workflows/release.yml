@@ -1,0 +1,25 @@
+on:
+  push:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Make tarball
+        run: |
+          release_version=$(cat lerna.json | jq -r '.version')
+          echo "RELEASE_VERSION=$release_version" >> $GITHUB_ENV
+          tar czf ./datasource.tar.gz datasource
+          tar czf ./component.tar.gz component
+          - name: Perform Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: v${{ env.RELEASE_VERSION }}
+          tag_name: v${{ env.RELEASE_VERSION }}
+          generate_release_notes: true
+          files: |
+            datasource.tar.gz
+            component.tar.gz
+
