@@ -12,10 +12,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: Make tarball
         run: |
-          release_version=$(cat lerna.json | jq -r '.version')
+          release_version=$(cat package.json | jq -r '.version')
           echo "RELEASE_VERSION=$release_version" >> $GITHUB_ENV
-          tar czf ./datasource.tar.gz datasource
-          tar czf ./component.tar.gz component
+          tar czf ./datasource.tar.gz datasource/*
+          tar czf ./component.tar.gz component/*
       - name: Perform Github Release
         uses: softprops/action-gh-release@v1
         with:
