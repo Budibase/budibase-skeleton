@@ -1,0 +1,22 @@
+{
+  "type": "datasource",
+  "metadata": {},
+  "schema": {
+    "docs": "",
+    "friendlyName": "",
+    "type": "",
+    "description": "",
+    "datasource": {
+    },
+    "query": {
+      "create": {
+      },
+      "read": {
+      },
+      "update": {
+      },
+      "delete": {
+      }
+    }
+  }
+}
