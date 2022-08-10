@@ -1,17 +1,12 @@
 <script>
-  import { onMount, getContext } from "svelte"
+  import { getContext } from "svelte"
 
-  const { API } = getContext("sdk")
-  let self
+  export let text
 
-  onMount(async () => {
-    self = await API.fetchSelf()
-  })
+  const { styleable } = getContext("sdk")
+  const component = getContext("component")
 </script>
 
-<div>
-  <b>This is a custom component.</b>
-</div>
-<div>
-  Your email address is {self?.email}.
+<div use:styleable={$component.styles}>
+  This is a custom component. The text setting is: {text}.
 </div>

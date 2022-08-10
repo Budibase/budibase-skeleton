@@ -6,9 +6,8 @@ const pkg = require("../package.json")
 const bundleName = `${pkg.name}-${pkg.version}.tar.gz`
 
 tar.c(
-    {
-        gzip: true,
-        cwd: "dist"
-    },
-    ["plugin.min.js", "schema.json", "package.json"]
-).pipe(fs.createWriteStream(`dist/${bundleName}`))
+  { gzip: true, cwd: "dist" },
+  ["plugin.min.js", "schema.json", "package.json"]
+).pipe(
+  fs.createWriteStream(`dist/${bundleName}`)
+)

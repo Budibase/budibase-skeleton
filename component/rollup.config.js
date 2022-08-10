@@ -51,7 +51,7 @@ export default {
     terser(),
     copy({
       assets: [
-          "schema.json", "package.json"
+        "schema.json", "package.json"
       ]
     }),
   ],
