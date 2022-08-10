@@ -1,11 +1,11 @@
 import Component from "./Component.svelte"
-import Schema from "../schema.json"
+import schema from "../schema.json"
 
 if (window) {
   if (!window["##BUDIBASE_CUSTOM_COMPONENTS##"]) {
     window["##BUDIBASE_CUSTOM_COMPONENTS##"] = []
   }
-  window["##BUDIBASE_CUSTOM_COMPONENTS##"].push({ Component, Schema })
+  window["##BUDIBASE_CUSTOM_COMPONENTS##"].push({ Component, schema })
 }
 
-export { Component, Schema }
+export { Component, schema }

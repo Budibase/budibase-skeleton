@@ -10,5 +10,8 @@
 </script>
 
 <div>
+  <b>This is a custom component.</b>
+</div>
+<div>
   Your email address is {self?.email}.
 </div>
