@@ -7,7 +7,7 @@ const bundleName = `${pkg.name}-${pkg.version}.tar.gz`
 
 tar.c(
   { gzip: true, cwd: "dist" },
-  ["plugin.min.js", "schema.json", "package.json"]
+  ["plugin.min.js", "schema.json.hbs", "package.json"]
 ).pipe(
   fs.createWriteStream(`dist/${bundleName}`)
 )

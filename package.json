@@ -13,6 +13,7 @@
     "prettier-plugin-svelte": "^2.7.0"
   },
   "dependencies": {
+    "svelte": "^3.49.0",
     "tar": "^6.1.11"
   }
 }

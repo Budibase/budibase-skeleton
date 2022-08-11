@@ -23,9 +23,9 @@ export default {
     file: "dist/plugin.min.js",
     name: "plugin",
     globals: {
-      "svelte": "svelte",
+      svelte: "svelte",
       "svelte/internal": "svelte_internal",
-    }
+    },
   },
   external: ["svelte", "svelte/internal"],
   plugins: [
@@ -44,15 +44,13 @@ export default {
     resolve({
       preferBuiltins: true,
       browser: true,
-      skip: ["svelte", "svelte/internal"]
+      skip: ["svelte", "svelte/internal"],
     }),
     svg(),
     json(),
     terser(),
     copy({
-      assets: [
-        "schema.json", "package.json"
-      ]
+      assets: ["schema.json.hbs", "package.json"],
     }),
   ],
 }
