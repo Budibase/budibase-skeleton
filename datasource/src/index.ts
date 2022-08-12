@@ -67,4 +67,4 @@ class HTTPIntegration implements IntegrationBase {
   }
 }
 
-export = HTTPIntegration
+export default HTTPIntegration

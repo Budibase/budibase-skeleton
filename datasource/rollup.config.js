@@ -5,7 +5,7 @@ import copy from "rollup-plugin-copy2"
 import typescript from "@rollup/plugin-typescript"
 
 export default {
-  input: "src/index.js",
+  input: "src/index.ts",
   output: {
     sourcemap: false,
     format: "cjs",
@@ -20,7 +20,7 @@ export default {
     json(),
     terser(),
     copy({
-      assets: ["schema.json.hbs", "package.json"],
+      assets: ["schema.json", "package.json"],
     }),
   ],
 }
