@@ -50,7 +50,7 @@ export default {
     json(),
     terser(),
     copy({
-      assets: ["schema.json.hbs", "package.json"],
+      assets: ["schema.json", "package.json"],
     }),
   ],
 }
