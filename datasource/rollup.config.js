@@ -19,7 +19,30 @@ export default {
       preferBuiltins: true,
       browser: false,
     }),
-    typescript(),
+    typescript({
+      compilerOptions: {
+        target: "es6",
+        module: "esnext",
+        lib: ["es2020"],
+        allowJs: true,
+        strict: true,
+        noImplicitAny: true,
+        esModuleInterop: true,
+        resolveJsonModule: true,
+        types: [ "node" ],
+        skipLibCheck: true,
+        moduleResolution: "node",
+      },
+      include: [
+        "./src/**/*"
+      ],
+      exclude: [
+        "node_modules",
+        "dist",
+        "**/*.spec.ts",
+        "**/*.spec.js",
+      ]
+    }),
     commonjs(),
     json(),
     terser(),
