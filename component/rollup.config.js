@@ -7,6 +7,9 @@ import svg from "rollup-plugin-svg"
 import json from "rollup-plugin-json"
 import nodePolyfills from "rollup-plugin-polyfill-node"
 import copy from "rollup-plugin-copy2"
+import tar from "tar"
+import fs from "fs"
+import pkg from "./package.json"
 
 const ignoredWarnings = [
   "unused-export-let",
@@ -14,6 +17,20 @@ const ignoredWarnings = [
   "module-script-reactive-declaration",
   "a11y-no-onchange",
 ]
+
+// Custom plugin to bundle up our files after building
+const bundle = () => ({
+  async buildEnd() {
+    const bundleName = `${pkg.name}-${pkg.version}.tar.gz`
+    return tar
+        .c({ gzip: true, cwd: "dist" }, [
+          "plugin.min.js",
+          "schema.json",
+          "package.json",
+        ])
+        .pipe(fs.createWriteStream(`dist/${bundleName}`))
+  },
+})
 
 export default {
   input: "src/index.js",
@@ -52,5 +69,6 @@ export default {
     copy({
       assets: ["schema.json", "package.json"],
     }),
+    bundle(),
   ],
 }

@@ -4,6 +4,23 @@ import { terser } from "rollup-plugin-terser"
 import json from "rollup-plugin-json"
 import copy from "rollup-plugin-copy2"
 import typescript from "@rollup/plugin-typescript"
+import tar from "tar"
+import fs from "fs"
+import pkg from "./package.json"
+
+// Custom plugin to bundle up our files after building
+const bundle = () => ({
+  async buildEnd() {
+    const bundleName = `${pkg.name}-${pkg.version}.tar.gz`
+    return tar
+        .c({ gzip: true, cwd: "dist" }, [
+          "plugin.min.js",
+          "schema.json",
+          "package.json",
+        ])
+        .pipe(fs.createWriteStream(`dist/${bundleName}`))
+  },
+})
 
 export default {
   input: "src/index.ts",
@@ -49,5 +66,6 @@ export default {
     copy({
       assets: ["schema.json", "package.json"],
     }),
+    bundle()
   ],
 }

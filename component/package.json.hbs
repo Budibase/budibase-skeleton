@@ -6,9 +6,8 @@
   "svelte": "src/index.js",
   "module": "dist/plugin.min.js",
   "scripts": {
-    "build": "npm-run-all build:js build:bundle",
-    "build:js": "rollup -c",
-    "build:bundle": "node scripts/bundle.cjs"
+    "build": "rollup -c",
+    "watch": "rollup -cw"
   },
   "dependencies": {
     "svelte": "^3.49.0"
