@@ -20,7 +20,7 @@ const ignoredWarnings = [
 
 // Custom plugin to bundle up our files after building
 const bundle = () => ({
-  async buildEnd() {
+  async writeBundle() {
     const bundleName = `${pkg.name}-${pkg.version}.tar.gz`
     return tar
         .c({ gzip: true, cwd: "dist" }, [
