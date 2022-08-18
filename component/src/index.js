@@ -1,9 +1,8 @@
 import Component from "./Component.svelte"
 import schema from "../schema.json"
-import pkg from "../package.json"
 
 if (window) {
-  const plugin = { Component, schema, version: pkg.version }
+  const plugin = { Component, schema }
   if (!window["##BUDIBASE_CUSTOM_COMPONENTS##"]) {
     window["##BUDIBASE_CUSTOM_COMPONENTS##"] = []
   }
