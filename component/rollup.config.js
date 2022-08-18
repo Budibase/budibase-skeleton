@@ -22,7 +22,14 @@ const ignoredWarnings = [
 // Custom plugin to clean the dist folder before building
 const clean = () => ({
   buildStart() {
-    fs.rmSync("./dist", { recursive: true, force: true })
+    const dist = "./dist/"
+    if (fs.existsSync(dist)) {
+      fs.readdirSync(dist).forEach(path => {
+        if (path.endsWith(".tar.gz")) {
+          fs.unlinkSync(dist + path)
+        }
+      })
+    }
   },
 })
 
