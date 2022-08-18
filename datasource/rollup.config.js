@@ -29,19 +29,12 @@ export default {
         noImplicitAny: true,
         esModuleInterop: true,
         resolveJsonModule: true,
-        types: [ "node" ],
+        types: ["node"],
         skipLibCheck: true,
         moduleResolution: "node",
       },
-      include: [
-        "./src/**/*"
-      ],
-      exclude: [
-        "node_modules",
-        "dist",
-        "**/*.spec.ts",
-        "**/*.spec.js",
-      ]
+      include: ["./src/**/*"],
+      exclude: ["node_modules", "dist", "**/*.spec.ts", "**/*.spec.js"],
     }),
     commonjs(),
     json(),
