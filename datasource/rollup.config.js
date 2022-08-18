@@ -7,6 +7,36 @@ import typescript from "@rollup/plugin-typescript"
 import tar from "tar"
 import fs from "fs"
 import pkg from "./package.json"
+import crypto from "crypto"
+
+// Custom plugin to clean the dist folder before building
+const clean = () => ({
+  buildStart() {
+    fs.rmSync("./dist", { recursive: true, force: true })
+  },
+})
+
+// Custom plugin to hash the JS bundle and write it in the schema
+const hash = () => ({
+  writeBundle() {
+    // Generate JS hash
+    const fileBuffer = fs.readFileSync("dist/plugin.min.js")
+    const hashSum = crypto.createHash("sha1")
+    hashSum.update(fileBuffer)
+    const hex = hashSum.digest("hex")
+
+    // Read and parse existing schema from dist folder
+    const schema = JSON.parse(fs.readFileSync("./dist/schema.json", "utf8"))
+
+    // Write updated schema to dist folder, pretty printed as JSON again
+    const newSchema = {
+      ...schema,
+      hash: hex,
+      version: pkg.version,
+    }
+    fs.writeFileSync("./dist/schema.json", JSON.stringify(newSchema, null, 2))
+  },
+})
 
 // Custom plugin to bundle up our files after building
 const bundle = () => ({
@@ -32,6 +62,7 @@ export default {
     exports: "default",
   },
   plugins: [
+    clean(),
     resolve({
       preferBuiltins: true,
       browser: false,
@@ -66,6 +97,7 @@ export default {
     copy({
       assets: ["schema.json", "package.json"],
     }),
+    hash(),
     bundle()
   ],
 }
