@@ -5,9 +5,8 @@
   "main": "src/index.ts",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "npm-run-all build:js build:bundle",
-    "build:js": "rollup -c",
-    "build:bundle": "node scripts/bundle.cjs"
+    "build": "rollup -c",
+    "watch": "rollup -cw"
   },
   "dependencies": {
     "@budibase/types": "^1.2.38",
