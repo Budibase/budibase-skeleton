@@ -23,7 +23,11 @@ class HTTPIntegration implements IntegrationBase {
     }
     const response = await fetch(url, opts)
     if (response.status <= 300) {
-      return response.json()
+      try {
+        return await response.json()
+      } catch (err) {
+        return await response.text()
+      }
     } else {
       const err = await response.text()
       throw new Error(err)
