@@ -1,0 +1,8 @@
+<script>
+    import Component from "../src/Component.svelte"
+    import Boundary from "./Boundary.js"
+</script>
+
+<Boundary>
+  <Component />
+</Boundary>

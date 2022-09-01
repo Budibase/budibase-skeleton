@@ -70,7 +70,7 @@ const bundle = () => ({
 })
 
 export default {
-  input: "src/index.js",
+  input: "index.js",
   output: {
     sourcemap: false,
     format: "iife",
