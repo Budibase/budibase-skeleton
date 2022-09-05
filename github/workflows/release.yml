@@ -12,6 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v1
+        with:
+          node-version: 16
       - name: Make the production plugin bundle
         run: |
           release_version=$(cat package.json | jq -r '.version')
