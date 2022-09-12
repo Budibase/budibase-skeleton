@@ -4,5 +4,5 @@
 </script>
 
 <Boundary>
-  <Component />
+  <Component {...$$props} />
 </Boundary>
