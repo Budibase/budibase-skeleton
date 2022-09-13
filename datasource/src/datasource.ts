@@ -24,7 +24,12 @@ class HTTPIntegration implements IntegrationBase {
     const response = await fetch(url, opts)
     if (response.status <= 300) {
       try {
-        return await response.json()
+        const contentType = response.headers.get("content-type")
+        if (contentType?.includes("json")) {
+          return await response.json()
+        } else {
+          return await response.text()
+        }
       } catch (err) {
         return await response.text()
       }
