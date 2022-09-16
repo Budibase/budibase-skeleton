@@ -7,7 +7,7 @@ interface Query {
   headers?: { [key: string]: string }
 }
 
-class HTTPIntegration implements IntegrationBase {
+class CustomIntegration implements IntegrationBase {
   private readonly url: string
   private readonly cookie: string
 
@@ -76,4 +76,4 @@ class HTTPIntegration implements IntegrationBase {
   }
 }
 
-export default HTTPIntegration
+export default CustomIntegration
