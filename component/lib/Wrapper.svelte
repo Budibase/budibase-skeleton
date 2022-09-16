@@ -4,5 +4,7 @@
 </script>
 
 <Boundary>
-  <Component {...$$props} />
+  <Component {...$$props}>
+    <slot/>
+  </Component>
 </Boundary>
