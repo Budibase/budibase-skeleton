@@ -7,7 +7,7 @@ interface Query {
   headers?: { [key: string]: string }
 }
 
-class HTTPIntegration implements IntegrationBase {
+class CustomIntegration implements IntegrationBase {
   private readonly url: string
   private readonly cookie: string
 
@@ -16,7 +16,7 @@ class HTTPIntegration implements IntegrationBase {
     this.cookie = config.cookie
   }
 
-  async query(url: string, opts: Query) {
+  async request(url: string, opts: Query) {
     if (this.cookie) {
       const cookie = { Cookie: this.cookie }
       opts.headers = opts.headers ? { ...opts.headers, ...cookie } : cookie
@@ -47,14 +47,14 @@ class HTTPIntegration implements IntegrationBase {
         "Content-Type": "application/json",
       },
     }
-    return this.query(this.url, opts)
+    return this.request(this.url, opts)
   }
 
   async read(query: { queryString: string }) {
     const opts = {
       method: "GET",
     }
-    return this.query(`${this.url}?${query.queryString}`, opts)
+    return this.request(`${this.url}?${query.queryString}`, opts)
   }
 
   async update(query: { json: object }) {
@@ -65,15 +65,15 @@ class HTTPIntegration implements IntegrationBase {
         "Content-Type": "application/json",
       },
     }
-    return this.query(this.url, opts)
+    return this.request(this.url, opts)
   }
 
   async delete(query: { id: string }) {
     const opts = {
       method: "DELETE",
     }
-    return this.query(`${this.url}/${query.id}`, opts)
+    return this.request(`${this.url}/${query.id}`, opts)
   }
 }
 
-export default HTTPIntegration
+export default CustomIntegration
