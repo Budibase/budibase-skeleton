@@ -72,7 +72,7 @@ const bundle = () => ({
 export default {
   input: "index.js",
   output: {
-    sourcemap: false,
+    sourcemap: process.env.ROLLUP_WATCH ? "inline" : false,
     format: "iife",
     file: "dist/plugin.min.js",
     name: "plugin",
