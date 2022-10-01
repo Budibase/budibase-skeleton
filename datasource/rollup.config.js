@@ -85,6 +85,7 @@ export default {
     resolve({
       preferBuiltins: true,
       browser: false,
+      exportConditions: ["node"]
     }),
     typescript({
       compilerOptions: {
