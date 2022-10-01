@@ -8,6 +8,7 @@ import tar from "tar"
 import fs from "fs"
 import pkg from "./package.json"
 import crypto from "crypto"
+import { validate } from "@budibase/backend-core/plugins"
 
 const iconFile = "icon.svg"
 const iconExists = fs.existsSync(iconFile)
@@ -62,6 +63,13 @@ const bundle = () => ({
   },
 })
 
+const validateSchema = () => ({
+  buildStart() {
+    const schema = fs.readFileSync("schema.json", "utf8")
+    validate(JSON.parse(schema))
+  }
+})
+
 export default {
   input: "src/index.ts",
   output: {
@@ -72,6 +80,7 @@ export default {
     exports: "default",
   },
   plugins: [
+    validateSchema(),
     clean(),
     resolve({
       preferBuiltins: true,

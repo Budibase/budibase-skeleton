@@ -11,6 +11,7 @@ import tar from "tar"
 import fs from "fs"
 import pkg from "./package.json"
 import crypto from "crypto"
+import { validate } from "@budibase/backend-core/plugins"
 
 const ignoredWarnings = [
   "unused-export-let",
@@ -69,6 +70,13 @@ const bundle = () => ({
   },
 })
 
+const validateSchema = () => ({
+  buildStart() {
+    const schema = fs.readFileSync("schema.json", "utf8")
+    validate(JSON.parse(schema))
+  }
+})
+
 export default {
   input: "index.js",
   output: {
@@ -83,6 +91,7 @@ export default {
   },
   external: ["svelte", "svelte/internal"],
   plugins: [
+    validateSchema(),
     clean(),
     svelte({
       emitCss: true,
