@@ -31,4 +31,5 @@ jobs:
           files: |
             datasource.tar.gz
             component.tar.gz
+            automation.tar.gz
 
