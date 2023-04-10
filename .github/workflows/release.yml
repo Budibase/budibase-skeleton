@@ -18,8 +18,10 @@ jobs:
           echo "RELEASE_VERSION=$release_version" >> $GITHUB_ENV
           cp -R github datasource/.github
           cp -R github component/.github
+          cp -R github automation/.github
           tar -C datasource -czf ./datasource.tar.gz ./
           tar -C component -czf ./component.tar.gz ./
+          tar -C automation -czf ./automation.tar.gz ./
       - name: Perform Github Release
         uses: softprops/action-gh-release@v1
         with:
