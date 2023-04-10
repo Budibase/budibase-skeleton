@@ -1,0 +1,39 @@
+{
+  "type": "automation",
+  "metadata": {},
+  "schema": {
+    "name": "Logger",
+    "tagline": "Console log a value in the backend",
+    "icon": "Monitoring",
+    "description": "Logs the given text to the server (using console.log)",
+    "type": "action",
+    "stepId": "logger",
+    "inputs": {
+      "text": ""
+    },
+    "schema": {
+      "inputs": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "title": "Log"
+          }
+        },
+        "required": ["text"]
+      }
+    },
+    "outputs": {
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "description": "Whether the action was successful"
+        },
+        "message": {
+          "type": "string",
+          "description": "What was output"
+        }
+      },
+      "required": ["success", "message"]
+    }
+  }
+}
