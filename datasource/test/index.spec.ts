@@ -8,7 +8,7 @@ describe("test the query types", () => {
   })
 
   async function catchError(cb: any) {
-    await expect(cb()).resolves.not.toThrowError();
+    await expect(cb()).resolves.not.toThrowError()
   }
 
   it("should run the create query", async () => {
