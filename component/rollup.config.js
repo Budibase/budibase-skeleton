@@ -6,10 +6,10 @@ import postcss from "rollup-plugin-postcss"
 import svg from "rollup-plugin-svg"
 import json from "rollup-plugin-json"
 import nodePolyfills from "rollup-plugin-polyfill-node"
-import copy from "rollup-plugin-copy2"
+import copy2 from "rollup-plugin-copy2"
 import tar from "tar"
 import fs from "fs"
-import pkg from "./package.json"
+const pkg = JSON.parse(fs.readFileSync(new URL('./package.json', import.meta.url), 'utf8'))
 import crypto from "crypto"
 import { validate } from "@budibase/backend-core/plugins"
 
@@ -79,22 +79,24 @@ const validateSchema = () => ({
 
 export default {
   input: "index.js",
+  external: (id) => id === "svelte" || id.startsWith("svelte/"),
   output: {
     sourcemap: process.env.ROLLUP_WATCH ? "inline" : false,
     format: "iife",
     file: "dist/plugin.min.js",
     name: "plugin",
-    globals: {
-      svelte: "svelte",
-      "svelte/internal": "svelte_internal",
-    },
+    globals: (id) => id === 'svelte/store' ? 'svelteStore' : (id.includes('/internal') ? 'svelteInternal' : 'svelte'),
   },
-  external: ["svelte", "svelte/internal"],
   plugins: [
     validateSchema(),
     clean(),
     svelte({
       emitCss: true,
+      compilerOptions: {
+        compatibility: {
+          componentApi: 4,
+        },
+      },
       onwarn: (warning, handler) => {
         // Ignore some warnings
         if (!ignoredWarnings.includes(warning.code)) {
@@ -108,12 +110,11 @@ export default {
     resolve({
       preferBuiltins: true,
       browser: true,
-      skip: ["svelte", "svelte/internal"],
     }),
     svg(),
     json(),
     terser(),
-    copy({
+    copy2.default({
       assets: ["schema.json", "package.json"],
     }),
     hash(),
