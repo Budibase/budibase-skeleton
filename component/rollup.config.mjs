@@ -85,7 +85,15 @@ export default {
     format: "iife",
     file: "dist/plugin.min.js",
     name: "plugin",
-    globals: (id) => id === 'svelte/store' ? 'svelteStore' : (id.includes('/internal') ? 'svelteInternal' : 'svelte'),
+    globals: (id) => {
+      if (id === "svelte/store") return "svelteStore"
+      if (id === "svelte/transition") return "svelteTransition"
+      if (id === "svelte/animate") return "svelteAnimate"
+      if (id === "svelte/motion") return "svelteMotion"
+      if (id === "svelte/easing") return "svelteEasing"
+      if (id.includes("/internal")) return "svelteInternal"
+      return "svelte"
+    },
   },
   plugins: [
     validateSchema(),
